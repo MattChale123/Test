@@ -6,6 +6,7 @@
   <title>Blackjack</title>
   <script src="scripts/main.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <script src="Blackjack_deck.js"></script>
 </head>
 <body>
 
@@ -16,15 +17,15 @@
         <span id="dealer-points" class="points"></span>
       </label>
       <div id="dealer-hand" class="hand">
-        <img src="images2">
+
       </div>
     </div>
     <div class="player">
-      <label class="player-name">Player: 
+      <label class="player-name">Player:
         <span id="player-points" class="points"></span>
       </label>
       <div id="player-hand" class="hand">
-        <img src="images2">
+        
       </div>
     </div>
     <div class="buttons">
@@ -32,38 +33,16 @@
       <input type="button" class="btn" value="hit me" onclick="hitMe()">
       <input type="button" class="btn" value="stay" onclick="stay()">
     </div>
+    <div class="deck">
+      <h1>A Deck of Cards</h1>
+
+      <a href="javascript:void(0)" class="btn" onclick="load()">Shuffle</a>
+      <div id="deck"></div>
+  </div>
   </div> 
 <script>
   
-  var suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs'];
-  var values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-  var deck = new Array();
-
-  function createDeck(){
-    deck = new Array();
-    for (var i = 0; i < values.length; i++){
-      for (var x =0; x < suits.length; x++){
-        var weight = parseInt(values[i]);
-        if (values[i] == 'J' || values[i] == 'Q' || values[i] == 'K')
-          weight = 10;
-        else if (values[i] == 'A')
-          weight = 11
-        var card = {Value: values[i], Suit: suits[x], Weight: weight};
-        deck.push(card)
-      }
-    }
-  }
-  function shuffle(){
-    // for 1000 turns
-    // switch the values of 2 random cards
-    for (var i = 0; i < 1000; i++){
-      var location1 = Math.floor((Math.random()*deck.length));
-      var location2 = Math.floor((Math.random()*deck.length));
-      var tmp = deck[location1];
-      deck[location1] = deck[location2];
-      deck[location2] = tmp;
-    }
-  }
+  
 
   var players = new Array();
   function createPlayers(num){
@@ -114,6 +93,7 @@
     {
         // alternate handing cards to each player
         // 2 cards each
+        load()
         for(var i = 0; i < 2; i++)
         {
             for (var x = 0; x < players.length; x++)
